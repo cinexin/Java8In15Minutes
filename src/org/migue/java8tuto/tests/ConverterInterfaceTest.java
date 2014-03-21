@@ -30,6 +30,53 @@ public class ConverterInterfaceTest {
 		assertEquals(expected, converted);
 	}
 	
+	@Test
+	public void anotherTestConvert() {
+
+		int num = 1;
+		// we can access local variables in a lambda function, must be final but not explicitly
+		/* for example, this code works OK... */
+		ConverterInterface<Integer, String> converter  =  (from) -> String.valueOf(from + num);
+		
+		String actualResult =  converter.convert(2);
+		String expectedResult = "3";
+		
+		assertEquals(expectedResult, actualResult);
+		
+		/* but this code wouldn't work...*/
+		/*int num = 1;
+		Converter<Integer, String> stringConverter =
+		        (from) -> String.valueOf(from + num);
+		num = 3; => see? you can't change a "final" variable!!
+		*/
+		
+		// notice writing the "num" variable within the lambda expression is also prohibited
+	}
+	
+    static int outerStaticNum = 72;
+    int outerNum = 23;
+	
+	@Test
+	public void testLambdaScopes() {
+
+
+        ConverterInterface<Integer, String> stringConverter1 = (from) -> {
+            outerNum = 23;
+            return String.valueOf(from);
+        
+        };
+            ConverterInterface<Integer, String> stringConverter2 = (from) -> {
+            outerStaticNum = 72;
+            return String.valueOf(from);
+        };
+        
+        String convertedOuterNum =  stringConverter1.convert(outerNum);
+        String convertedOuterStaticNum = stringConverter2.convert(outerStaticNum);
+        
+        assertEquals("23", convertedOuterNum);
+        assertEquals("72", convertedOuterStaticNum);
+
+	}
 
 
 }
