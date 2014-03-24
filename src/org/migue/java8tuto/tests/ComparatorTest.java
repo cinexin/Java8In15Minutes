@@ -21,7 +21,7 @@ public class ComparatorTest {
 		
 		Comparator<Person> personComparator = (p1,p2) -> p1.getFirstName().compareTo(p2.getFirstName());
 		
-		Person p1 = new Person("John", "Doe");
+		Person p1 = new Person("Mark", "Renton");
 		Person p2 = new Person ("Alice", "Wonderland");
 		Person p3 = new Person ("Alice", "in Wonderland");
 		
