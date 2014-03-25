@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class NewMapMethodsTest {
 
-	private static Map<Integer, String> map = new HashMap<>();
+	private static Map<Integer, String> map = new HashMap<Integer, String>();
 	
 	@SuppressWarnings("deprecation")
 	@Test
